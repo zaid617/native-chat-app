@@ -20,7 +20,8 @@ const bottom_tabs = () => {
             backgroundColor: '#f5f5f5',
             height: 60,
             borderTopWidth: 0,
-            elevation: 10,
+            shadow: "none",
+            elevation: 0,
           },
         }}
       >
@@ -43,29 +44,34 @@ const bottom_tabs = () => {
           }}
         />
       </Tab.Navigator>
-      <FAB
-        style={[styles.fab]}
-        color='#fff'
-        icon="plus"
-        onPress={() => console.log('FAB pressed')}
-      />
+        <FAB
+          style={[styles.fab]} 
+          color="#fff"
+          icon="plus"
+          onPress={() => console.log('FAB pressed')}
+        />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
   fab: {
     position: 'absolute',
-    margin: 16,
-    left: '39%',
-    borderRadius: '50%',
     bottom: 50,
-    color: '#ffff',
+    left: '50%',
+    transform: [{ translateX: -28 }],
+    alignItems: 'center',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    zIndex: 10,
     backgroundColor: color.primary,
-    transform: [{ translateY: 28 }],
-    boxShadow: '0 6 0 2 white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '0 6 0 4 white',
   },
-  
+
 });
 
 export default bottom_tabs;
