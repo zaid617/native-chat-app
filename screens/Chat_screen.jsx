@@ -30,7 +30,7 @@ const Chat_screen = ({ route }) => {
     setMessages((prevMessages) =>
       GiftedChat.append(prevMessages, newMessages.map(msg => ({
         ...msg,
-        user: { _id: 1, name: 'You' }, // Ensure consistent format
+        user: { _id: 1, name: 'You' },
       })))
     );
   };
