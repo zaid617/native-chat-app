@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { chats } from '../assets/data/data';
 
 const Chat_screen = ({ route }) => {
-  const { userId } = route.params;
+  const { userId } = route.params || {};
   const [messages, setMessages] = useState([]);
 
-  console.log("userId", userId);
+  if (!userId) return <View style={styles.container}><Text>No User ID</Text></View>;
 
   useEffect(() => {
-    const chatData = chats.find((c) => c.userId == userId);
+    const chatData = chats.find((c) => c.userId.toString() === userId.toString());
 
     if (chatData) {
       const formattedMessages = chatData.messages.map((msg) => ({
         _id: msg.id, 
         text: msg.text,
-        createdAt: new Date(msg.timestamp) || new Date(),
+        createdAt: msg.timestamp ? new Date(msg.timestamp) : new Date(),
         user: {
-          _id: msg.sender,
+          _id: msg.sender.toString(),
           name: msg.sender === '1' ? 'You' : 'Other User',
         },
       }));
@@ -30,7 +30,7 @@ const Chat_screen = ({ route }) => {
     setMessages((prevMessages) =>
       GiftedChat.append(prevMessages, newMessages.map(msg => ({
         ...msg,
-        user: { _id: '1', name: 'You' },
+        user: { _id: 1, name: 'You' }, // Ensure consistent format
       })))
     );
   };
@@ -40,7 +40,7 @@ const Chat_screen = ({ route }) => {
       <GiftedChat
         messages={messages}
         onSend={onSend}
-        user={{ _id: '1' }}
+        user={{ _id: 1 }}
       />
     </View>
   );

@@ -33,7 +33,7 @@ const Intro_screen = () => {
               styles.uper_section_boxes,
               styles.border_bottom_left_radius,
             ]}>
-            <Image source={pic_4} style={[styles.img, {right: 25}]} />
+            <Image source={pic_4} style={[styles.img, {left: -30, top: -8 , width: 200} ]} />
           </View>
           <View style={[styles.circle, styles.uper_section_boxes]}>
             <Image source={pic_2} style={[styles.img, {bottom: 12}]} />

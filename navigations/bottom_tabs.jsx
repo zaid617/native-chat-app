@@ -14,7 +14,6 @@ const bottom_tabs = () => {
     <View style={{ flex: 1 }}>
       <Tab.Navigator
         screenOptions={{
-          headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: '#f5f5f5',
