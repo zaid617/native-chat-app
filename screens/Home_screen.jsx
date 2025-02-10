@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {users} from '../assets/data/data';
 import img from '../assets/imgs/profile_img.png';
-import logo from '../assets/imgs/wellcome_logo.png';
+import logo from '../assets/imgs/logo_white.png';
 
 const {width, height} = Dimensions.get('window');
 const scaleFont = size => size * PixelRatio.getFontScale();
