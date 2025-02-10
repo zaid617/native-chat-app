@@ -1,17 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { chats } from '../assets/data/data';
+import img from '../assets/imgs/profile_img.png';
 
-const Chat_screen = ({ route }) => {
-  const { userId } = route.params || {};
+
+const { width , height } = Dimensions.get('window');
+
+const Chat_screen = ({ route, navigation }) => {
+  const { userId, name } = route.params || {};
   const [messages, setMessages] = useState([]);
 
-  if (!userId) return <View style={styles.container}><Text>No User ID</Text></View>;
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+        <View style={{ flexDirection: 'row', alignItems: 'center' , justifyContent: 'space-between' , width: width * 0.8 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Image 
+            source={ img } 
+            style={{ width: 35, height: 35, borderRadius: 50, marginRight: 10 }}
+          />
+          <Text style={{ fontSize: 18, fontWeight: 'bold' , color: '#fff' }}>{name}</Text>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <Icon name="call" size={30} color={'#fff'} />
+          <Icon name="more-vert" size={30} color={'#fff'} />
+        </View>
+        </View>
+      ),
+    });
+  }, [navigation, name]);
+
+  if (!userId) {
+    return <View style={styles.container}><Text>No User ID</Text></View>;
+  }
 
   useEffect(() => {
     const chatData = chats.find((c) => c.userId.toString() === userId.toString());
-
     if (chatData) {
       const formattedMessages = chatData.messages.map((msg) => ({
         _id: msg.id, 
